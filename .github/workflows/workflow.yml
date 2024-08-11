@@ -13,17 +13,15 @@ jobs: # 작업 정의
       - uses: actions/github-script@v7
         with: # 옵션 설정
           script: |
-            const { context, github } = require('@actions/github'); // context와 github 가져오기
-            
             const pull_request = context.payload.pull_request; // pull_request 객체 가져오기
-            
+
             if (!pull_request) { // pull_request가 없는 경우
               console.log("This is not a pull request"); // "This is not a pull request" 출력
               return; // 종료
             }
-            
+
             const body = pull_request.body; // body 속성 가져오기
-            
+
             if (!body) {
               // PR에 코멘트 추가
               await github.rest.issues.createComment({
